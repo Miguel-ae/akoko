@@ -6,7 +6,7 @@
 
 	<!-- Default form register -->
 <form class="text-center p-5" action="#!">
-<h1 class="logo pb-5 pt-3 animated fadeInDown">AKOKO</h1>
+<h1 class="logo pb-5 pt-3 animated fadeInDown">AK<i class="far fa-clock"></i>KO</h1>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-md-5 col-xl-3 animated fadeInUp"> 
