@@ -85,3 +85,24 @@ li i{
 	border-width: 1px;
 	border-radius: 15px;
 }
+
+.timer-title{
+	padding: 25px;
+}
+
+.timer{
+	padding-left: 50px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.fa-play-circle{
+	font-size: 50px;
+	color: #D384BF;
+}
+
+.field-border-data{
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 6px;
+}

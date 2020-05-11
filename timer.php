@@ -26,7 +26,7 @@
 
 
     <!-- TIMER -->
-    <section class="">
+    <section class="animated fadeInDown">
       
       <div class="row p-5">
         <div class="col-3">
@@ -35,13 +35,69 @@
              <div class="datetime-calendar">Lunes, 03 de Abril de 2020</div> <!-- Aqui cambiara la fecha a la fecha de hoy DATETIME CURRENT -->
            </div>
         </div>
-        <div class="col-9 pl-5">
-           <div class="field-border row align-items-center">
-             div
-           </div>
-        </div>
+
+          <!-- Timer Panel -->
+          <div class="col-9 pl-5">
+             <form action="">
+              <div class="field-border row align-items-center">
+                      <!-- Title -->
+                      <div class="col-7 p-3">
+                        <input type="text" class="form-control timer-title" id="description" placeholder="¿En que estas trabajando?">
+                      </div>
+
+                      <!-- Categories -->
+                      <div class="col-2 p-0">
+                      <select id="categories" class="form-control">
+                        <option disabled selected>Categories</option>
+                        <option>Sports</option>
+                        <option>Study</option>
+                        <option>Languages</option>
+                        <option>Office</option>
+                      </select>
+                      </div>
+
+                      <!-- Timer -->
+                      <div class="col-2 timer">
+                        00:00:00
+                      </div>
+                      
+                      <!-- Button Play -->
+                      <div class="col-1">
+                        <a class="" href=""><i class="fas fa-play-circle"></i></a>
+                                <!--  El boton Play al dar click se cambiara mediante JQuery al de Stop
+                                             <i class="fas fa-stop-circle"></i>     -->
+                      </div>
+
+                </div>
+             </form>  
+          </div>
       </div>
 
+
+      <div class="row px-5 justify-content-center">
+          <div class="col-10 field-border-data px-5 ">
+            HOLA
+          </div>
+      </div>
+
+
+      <div class="row px-5 justify-content-center">
+          <div class="col-10 field-border-data px-5">
+            HOLA
+          </div>
+      </div>
+      
+      <div class="row px-5 justify-content-center">
+          <div class="col-10 field-border-data px-5">
+            HOLA
+          </div>
+      </div>
+
+
+      <!-- Show More Content button -->
+      <div class="row justify-content-center pt-4">
+        <button class="btn btn-secondary p-2 px-4">Show More</button>
+      </div>
     </section>
     
     <!-- TIMER END-->
