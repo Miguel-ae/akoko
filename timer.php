@@ -1,7 +1,6 @@
 <!-- Libraries & start html,head,meta,links,... -->
 <?php include 'includes/link.php';?>
 
-
 <body>
 
     <!-- NAVBAR -->
@@ -11,7 +10,7 @@
            <ul class="nav align-items-center">
               <li><i class="far fa-clock"></i></li>
               <li><a class="text-secondary" href="timer.php">Timer</a></li>
-              <li><a class="" href="#">Calendar</a></li>
+              <li><a class="" href="calendar.php">Calendar</a></li>
               <li><a class="" href="#">Tasks</a></li>
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
@@ -28,7 +27,7 @@
     <!-- TIMER -->
     <section class="animated fadeInDown">
       
-      <div class="row p-5">
+      <div class="row p-5 panel">
         <div class="col-3">
            <div class="field-border row align-items-center">
              <i class="fas fa-calendar-alt"></i>
@@ -68,44 +67,68 @@
                                              <i class="fas fa-stop-circle"></i>     -->
                       </div>
 
+                  </div>
+              </form>  
+            </div>
+         </div>
+     </section>
+
+
+    <section class="animated fadeInUp">
+
+          <div class="row px-5 justify-content-center aceituna" id="block">
+              <div class="col-10 field-border-data px-5" id="element">
+                <div class="row py-5">
+                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-1 px-1 py-2 btn">Delete</div>
+                  <div class="col-1 px-1 py-2 btn">Edit</div>
+                  <div class="col-2"></div>
+                  <div class="col-2"></div>
+                  <div class="col-1"></div>
                 </div>
-             </form>  
+              </div>
           </div>
-      </div>
 
-
-      <div class="row px-5 justify-content-center">
-          <div class="col-10 field-border-data px-5 ">
-            HOLA
+          <div class="row px-5 justify-content-center aceituna">
+              <div class="col-10 field-border-data px-5">
+                <div class="row py-5">
+                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-1 px-1 py-2 btn">Delete</div>
+                  <div class="col-1 px-1 py-2 btn">Edit</div>
+                  <div class="col-2"></div>
+                  <div class="col-2"></div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
           </div>
-      </div>
 
-
-      <div class="row px-5 justify-content-center">
-          <div class="col-10 field-border-data px-5">
-            HOLA
+          <div class="row px-5 justify-content-center aceituna">
+              <div class="col-10 field-border-data px-5">
+                <div class="row py-5">
+                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-1 px-1 py-2 btn">Delete</div>
+                  <div class="col-1 px-1 py-2 btn">Edit</div>
+                  <div class="col-2"></div>
+                  <div class="col-2"></div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
           </div>
-      </div>
-      
-      <div class="row px-5 justify-content-center">
-          <div class="col-10 field-border-data px-5">
-            HOLA
+
+          
+
+
+
+          <!-- Show More Content button -->
+          <div class="row justify-content-center pt-4">
+            <button class="btn btn-secondary p-2 px-4">Show More</button>
           </div>
-      </div>
-
-
-      <!-- Show More Content button -->
-      <div class="row justify-content-center pt-4">
-        <button class="btn btn-secondary p-2 px-4">Show More</button>
-      </div>
-    </section>
+   
+    </section> 
     
     <!-- TIMER END-->
 
 </body>
-
-
-
 
 <!-- Scripts & final html -->
 <?php include 'includes/script.php' ?>
