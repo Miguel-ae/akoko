@@ -53,8 +53,7 @@
      </div>
 
 </form>
-<!-- Default form login -->
+<!-- Default form login END -->
 
-
-<!-- Scripts & final html -->
-<?php include 'includes/script.php' ?>
+</body>
+</html>

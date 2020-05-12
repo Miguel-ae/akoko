@@ -74,7 +74,7 @@
      </section>
 
 
-    <section class="animated fadeInUp">
+    <section class="animated fadeInDown">
 
           <div class="row px-5 justify-content-center aceituna" id="block">
               <div class="col-10 field-border-data px-5" id="element">
@@ -130,5 +130,5 @@
 
 </body>
 
-<!-- Scripts & final html -->
-<?php include 'includes/script.php' ?>
+
+</html>

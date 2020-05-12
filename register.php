@@ -46,8 +46,9 @@
 			</div>
 		</div>
 </form>
-<!-- Default form register -->
+<!-- Default form register END-->
 
 
-<!-- Scripts & final html -->
-<?php include 'includes/script.php' ?>
+
+</body>
+</html>

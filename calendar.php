@@ -11,7 +11,7 @@
            <ul class="nav align-items-center">
               <li><i class="far fa-clock"></i></li>
               <li><a class="" href="timer.php">Timer</a></li>
-              <li><a class="text-secondary" href="#">Calendar</a></li>
+              <li><a class="text-secondary" href="calendar.php">Calendar</a></li>
               <li><a class="" href="#">Tasks</a></li>
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
@@ -27,7 +27,37 @@
 
 
 
+    <!-- CALENDAR -->
+
+   
+        <div class="container-fluid animated fadeInDown">
+          <div class="row">
+            <div class="col"></div>
+
+            <div class="col-9 pt-5">
+                <div id="CalendarWeb"></div>
+            </div>
+
+            <div class="col"></div>
+          </div>
+        </div>
+
+      
+
+          <script>
+            $(document).ready(function(){
+                $('#CalendarWeb').fullCalendar();
+            });
+
+          </script>
+
+   
+
+    <!-- CALENDAR END-->
+
+
+
 </body>
 
-<!-- Scripts & final html -->
-<?php include 'includes/script.php' ?>
+
+</html>
