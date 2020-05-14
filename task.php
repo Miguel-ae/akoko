@@ -1,3 +1,24 @@
+<?php 
+  // Connect to database
+  $db = new mysqli('localhost', 'root', '', 'akoko');
+
+  $categoryQuery = "SELECT * FROM categories";
+
+  $categories = $db->query($categoryQuery);
+
+
+
+
+  $taskQuery = "SELECT * FROM task WHERE id_user=1";
+
+  $tasks = $db->query($taskQuery);
+
+
+
+
+ ?>
+
+
 <!-- Libraries & start html,head,meta,links,... -->
 <?php include 'includes/link.php';?>
 
@@ -27,30 +48,31 @@
 
 
     <!-- TASK  -->
-    <section class="animated fadeInDown">
+    <section class="">
       <div class="col-11 container">
-        <form method="POST" action="task.php">
+        <form method="POST" action="addtask.php">
           <div class="row p-5 justify-content-center align-items-center">
 
                 <!-- Title -->
-                <button class="btn col-1 btn-pencil">
+                <button class="btn col-1 btn-pencil" type="submit" name="submit">
                    
                    <i class="fas fa-pencil-alt"></i>
                    
                 </button>            
                 <div class="col-8 p-3">
 
-                  <input type="text" class="form-control timer-title" id="description" placeholder="Add a task ...">
+                  <input type="text" class="form-control timer-title" id="description" placeholder="Add a task ..." name="title">
+                  <input type="date" name="limit_date">
                 </div>
 
                 <!-- Categories -->
                 <div class="col-2 p-0">
-                  <select id="categories" class="form-control">
+                  <select name="category" class="form-control">
                       <option disabled selected>Categories</option>
-                      <option>Sports</option>
-                      <option>Study</option>
-                      <option>Languages</option>
-                      <option>Office</option>
+                      <?php while ($category=$categories->fetch_assoc()) { ?>
+                             <option value="<?=$category['id']?>"><?=$category['title']?></option> 
+                        <?php }?>
+                       
                   </select>
                 </div>
 
@@ -67,26 +89,19 @@
     <section class="animated fadeInDown">
       
       <div class="col-6 container py-2">
-
-            <div class="pb-2">
-                <div class="row text-center align-items-center btn-outline-dark rounded">
-                  
-                <div class="col-2"><i class="fas fa-check-square"></i></div>
-                <div class="col-9 text-left p-2 pl-5">Texto de ejemplo</div>
-                <div class="col-1"><i class="fas fa-backspace"></i></div>
-            
+              <?php while ($task=$tasks->fetch_assoc()) { ?>
+                <div class="pb-2">
+                    <div class="row text-center align-items-center btn-outline-dark rounded">
+                      
+                    <div class="col-2"><i class="fas fa-check-square"></i></div>
+                    <div class="col-9 text-left p-2 pl-5"><?=$task['title']?></div>
+                    <div class="col-1"><i class="fas fa-backspace"></i></div>
+          
                 </div>
              </div>
-
-              <div class="pb-5">
-                <div class="row text-center align-items-center btn-outline-dark rounded">
-                  
-                <div class="col-2"><i class="fas fa-check-square"></i></div>
-                <div class="col-9 text-left p-2 pl-5">Texto de ejemplo</div>
-                <div class="col-1"><i class="fas fa-backspace"></i></div>
-            
-                </div>
-             </div>
+                    <?php }?>
+                       
+           
              
           
       </div>
