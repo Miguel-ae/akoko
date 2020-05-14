@@ -117,3 +117,32 @@ li i{
 }
 
 
+
+/*TASK*/
+
+.fa-pencil-alt{
+	font-size: 14px;
+}
+
+.btn-pencil:hover{
+	background-color: #D384BF;
+}
+
+
+.fa-check-square{
+	padding-top: 3px;
+	font-size: 30px;
+}
+.fa-check-square:hover{
+	color: #4462FB;
+	font-size: 32px;
+}
+
+
+.fa-backspace{
+	padding-top: 3px;
+	font-size: 20px;
+}
+.fa-backspace:hover{
+	color: grey;
+}

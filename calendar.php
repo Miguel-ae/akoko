@@ -12,7 +12,7 @@
               <li><i class="far fa-clock"></i></li>
               <li><a class="" href="timer.php">Timer</a></li>
               <li><a class="text-secondary" href="calendar.php">Calendar</a></li>
-              <li><a class="" href="#">Tasks</a></li>
+              <li><a class="" href="task.php">Tasks</a></li>
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
@@ -58,6 +58,4 @@
 
 
 </body>
-
-
 </html>

@@ -11,7 +11,7 @@
               <li><i class="far fa-clock"></i></li>
               <li><a class="text-secondary" href="timer.php">Timer</a></li>
               <li><a class="" href="calendar.php">Calendar</a></li>
-              <li><a class="" href="#">Tasks</a></li>
+              <li><a class="" href="task.php">Tasks</a></li>
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
@@ -31,7 +31,7 @@
         <div class="col-3">
            <div class="field-border row align-items-center">
              <i class="fas fa-calendar-alt"></i>
-             <div class="datetime-calendar">Lunes, 03 de Abril de 2020</div> <!-- Aqui cambiara la fecha a la fecha de hoy DATETIME CURRENT -->
+             <div class="datetime-calendar">Monday 03, May, 2020</div> <!-- Aqui cambiara la fecha a la fecha de hoy DATETIME CURRENT -->
            </div>
         </div>
 
@@ -41,7 +41,7 @@
               <div class="field-border row align-items-center">
                       <!-- Title -->
                       <div class="col-7 p-3">
-                        <input type="text" class="form-control timer-title" id="description" placeholder="¿En que estas trabajando?">
+                        <input type="text" class="form-control timer-title" id="description" placeholder="What are you working on?">
                       </div>
 
                       <!-- Categories -->
