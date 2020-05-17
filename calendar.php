@@ -53,27 +53,37 @@
                         right:'month, basicWeek,basicDay, agendaWeek,agendaDay'
                     },
                     dayClick:function(date,jsEvent,view){
-                        alert("Valor seleccionado" + date.format());
-                        alert("Vista actual:" + view.name);
-                        $(this).css('background-color', 'red');
-                        $("#exampleModal").modal();
+
+                        $("#txtDate").val(date.format());
+                        $("#modalEvent").modal();
+
                     },
-                    events:[
-                        {
-                          title:'event1',
-                          start:'2020-05-01'
-                        },
-                        {
-                          title:'event2',
-                          start:'2020-05-07',
-                          end:'2020-05-09',
-                        },
-                        {
-                          title:'event3',
-                          start:'2020-05-11T12:30:00',
-                          allDay:false
-                        }
-                    ]
+
+                    events:'http://localhost/akoko_final/events.php',
+
+                  
+                    eventClick:function(calEvent,jsEvent,view){
+
+                      // H2
+                      $('#titleEvent').html(calEvent.title);
+                      // Mostrar info del evetno en los inputs
+                      $('#txtDescription').val(calEvent.description);
+                      $('#txtID').val(calEvent.id);
+                      $('#txtTitle').val(calEvent.title);
+                      $('#txtColor').val(calEvent.color);
+
+                      //Accede al formato con _i y lo separa
+                      DateTime = calEvent.start._i.split(" ");
+                      $('#txtDate').val(DateTime[0]);
+                      $('#txtTime').val(DateTime[1]);
+
+
+
+
+
+                      $("#modalEvent").modal();
+                    }
+
 
                 });
             });
@@ -86,21 +96,29 @@
 
 
 
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <!-- Modal (Add, Edit, Delete)-->
+      <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add title</h5>
+              <h5 class="modal-title" id="titleEvent"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+              
+              Id: <input type="text" id="txtID" name="txtID">
+              Date: <input type="text" id="txtDate" name="txtDate"><br/>
+              Title: <input type="text" id="txtTitle"><br/>
+              Time: <input type="text" id="txtTime" value="10:30"><br/>
+              Description: <textarea id="txtDescription" rows="3"></textarea><br/>
+              Color: <input type="color" value="#ff0000" id="txtColor"><br/>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success">Add</button>
+              <button type="button" id="btnAdd" class="btn btn-success">Add</button>
               <button type="button" class="btn btn-info">Edit</button>
               <button type="button" class="btn btn-danger">Delete</button>
               <button type="button" class="btn btn-light" data-dismiss="modal">Exit</button>
@@ -108,6 +126,37 @@
           </div>
         </div>
       </div>
+
+
+
+
+      <script>
+
+      var newEvent;
+        
+      $("#btnAdd").click(function(){
+         collectDataGUI();
+         $('#CalendarWeb').fullCalendar('renderEvent', newEvent);
+         $("#modalEvent").modal('toggle');
+      });
+
+
+      function collectDataGUI(){
+        newEvent = {
+          id:$("#txtID").val(),
+          title:$("#txtTitle").val(),
+          start:$("#txtDate").val() + " " + $("#txtTime").val(),
+          color:$("#txtColor").val(),
+          description:$("txtDescription").val(),
+          textColor:"#FFFFFF",
+          end:$("#txtDate").val() + " " + $("#txtTime").val(),
+        };
+
+
+      }
+
+      </script>
+
 
 </body>
 </html>
