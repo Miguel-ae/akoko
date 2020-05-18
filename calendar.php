@@ -132,28 +132,66 @@
 
       <script>
 
-      var newEvent;
+      var form = new FormData();
         
       $("#btnAdd").click(function(){
          collectDataGUI();
-         $('#CalendarWeb').fullCalendar('renderEvent', newEvent);
-         $("#modalEvent").modal('toggle');
+         sendData('add',form);
       });
 
 
       function collectDataGUI(){
-        newEvent = {
-          id:$("#txtID").val(),
-          title:$("#txtTitle").val(),
-          start:$("#txtDate").val() + " " + $("#txtTime").val(),
-          color:$("#txtColor").val(),
-          description:$("txtDescription").val(),
-          textColor:"#FFFFFF",
-          end:$("#txtDate").val() + " " + $("#txtTime").val(),
-        };
-
+        form.append("title", $("#txtTitle").val());
+        form.append("description", $("#txtDescription").val());
+        form.append("color", $("#txtColor").val());
+        form.append("textColor", "#FFFFFF");
+        form.append("start", $("#txtDate").val() + " " + $("#txtTime").val());
+        form.append("end", $("#txtDate").val() + " " + $("#txtTime").val());
 
       }
+
+      function sendData(action,objEvent){
+          var settings = {
+            "url": "events.php?action="+action,
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": objEvent
+          };
+
+          $.ajax(settings).done(function (response) {
+            $('#CalendarWeb').fullCalendar('refetchEvents');
+            $("#modalEvent").modal('toggle');
+            console.log(response);
+          });
+      }
+
+
+
+
+
+        
+
+
+
+        // console.log(objEvent);
+        //   $.ajax({
+        //       type:'POST',
+        //       url:'events.php?action='+action,
+        //       data:objEvent,
+        //       success:function(msg){
+        //         if (msg) {
+        //           $('#CalendarWeb').fullCalendar('refetchEvents');
+        //           $("#modalEvent").modal('toggle');
+
+        //         }
+        //       },
+        //       error:function(){
+        //           alert('There is an ERROR ...');
+        //       }
+        //   });
 
       </script>
 
