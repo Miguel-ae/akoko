@@ -31,13 +31,13 @@
         <div class="col-3">
            <div class="field-border row align-items-center">
              <i class="fas fa-calendar-alt"></i>
-             <div class="datetime-calendar">Monday 03, May, 2020</div> <!-- Aqui cambiara la fecha a la fecha de hoy DATETIME CURRENT -->
+             <div class="datetime-calendar"></div> <!-- Aqui cambiara la fecha a la fecha de hoy DATETIME CURRENT -->
            </div>
         </div>
 
           <!-- Timer Panel -->
           <div class="col-9 pl-5">
-             <form action="">
+             <form action="POST" action="addtimer.php">
               <div class="field-border row align-items-center">
                       <!-- Title -->
                       <div class="col-7 p-3">
@@ -57,12 +57,12 @@
 
                       <!-- Timer -->
                       <div class="col-2 timer">
-                        00:00:00
+                        <span id="minutes"></span>:<span id="seconds"></span>
                       </div>
                       
                       <!-- Button Play -->
-                      <div class="col-1">
-                        <a class="" href=""><i class="fas fa-play-circle"></i></a>
+                      <div class="col-1" id="btn-timer-script">
+                        <a id="btnTimer"><i class="fas fa-play-circle"></i></a>
                                 <!--  El boton Play al dar click se cambiara mediante JQuery al de Stop
                                              <i class="fas fa-stop-circle"></i>     -->
                       </div>
@@ -78,43 +78,36 @@
 
           <div class="row px-5 justify-content-center aceituna" id="block">
               <div class="col-10 field-border-data px-5" id="element">
-                <div class="row py-5">
-                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
-                  <div class="col-1 px-1 py-2 btn">Delete</div>
-                  <div class="col-1 px-1 py-2 btn">Edit</div>
-                  <div class="col-2"></div>
-                  <div class="col-2"></div>
-                  <div class="col-1"></div>
+                <div class="row py-4 align-items-center">
+                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-2">Sports</div>
+                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
+                  <div class="col-3 text-right text-time">00:00:00</div>
                 </div>
               </div>
           </div>
 
-          <div class="row px-5 justify-content-center aceituna">
-              <div class="col-10 field-border-data px-5">
-                <div class="row py-5">
-                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
-                  <div class="col-1 px-1 py-2 btn">Delete</div>
-                  <div class="col-1 px-1 py-2 btn">Edit</div>
-                  <div class="col-2"></div>
-                  <div class="col-2"></div>
-                  <div class="col-1"></div>
+          <div class="row px-5 justify-content-center aceituna" id="block">
+              <div class="col-10 field-border-data px-5" id="element">
+                <div class="row py-4 align-items-center">
+                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-2">Sports</div>
+                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
+                  <div class="col-3 text-right text-time">00:00:00</div>
                 </div>
               </div>
           </div>
 
-          <div class="row px-5 justify-content-center aceituna">
-              <div class="col-10 field-border-data px-5">
-                <div class="row py-5">
-                  <div class="col-5 py-2">Lorem ipsum dolor sit amet, consectetur</div>
-                  <div class="col-1 px-1 py-2 btn">Delete</div>
-                  <div class="col-1 px-1 py-2 btn">Edit</div>
-                  <div class="col-2"></div>
-                  <div class="col-2"></div>
-                  <div class="col-1"></div>
+          <div class="row px-5 justify-content-center aceituna" id="block">
+              <div class="col-10 field-border-data px-5" id="element">
+                <div class="row py-4 align-items-center">
+                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-2">Sports</div>
+                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
+                  <div class="col-3 text-right text-time">00:00:00</div>
                 </div>
               </div>
           </div>
-
           
 
 
@@ -127,6 +120,36 @@
     </section> 
     
     <!-- TIMER END-->
+
+
+
+
+
+
+    <script>
+      //CURRENT DATE PRINCIPAL PANEL
+    var month = new Array ("January","February","March","April","May","June","July","August","September","October","November","December");
+    var dayWeeks = new Array("Sunday","Monday","Tuesday","Wendesday","Thursday","Friday","Saturday");
+    var d = new Date();
+    var date = dayWeeks[d.getDay()] + " " + d.getDate() + ", " + month[d.getMonth()] + ", " + d.getFullYear();
+    $('.datetime-calendar').html(date);
+        // Monday 03, May, 2020
+
+    $("#btnTimer").click(function(){
+        var sec = 0;
+        function pad ( val ) { return val > 9 ? val : "0" + val; }
+        setInterval( function(){
+            $("#seconds").html(pad(++sec%60));
+            $("#minutes").html(pad(parseInt(sec/60,10)));
+            console.log(sec);
+          }, 1000);
+        $("#btn-timer-script").html("<a id=\"btnTimer\"><i class=\"fas fa-stop-circle\"></i></a>");
+    });
+
+
+
+
+    </script>
 
 </body>
 
