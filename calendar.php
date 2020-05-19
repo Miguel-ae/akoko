@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col"></div>
 
-            <div class="col-9 pt-4">
+            <div class="col-10 pt-4 animated fadeInDown">
                 <div id="CalendarWeb"></div>
             </div>
 
@@ -53,7 +53,7 @@
                         right:'month, basicWeek,basicDay, agendaWeek,agendaDay'
                     },
                     dayClick:function(date,jsEvent,view){
-
+                        cleanForm();
                         $("#txtDate").val(date.format());
                         $("#modalEvent").modal();
 
@@ -75,13 +75,23 @@
                       //Accede al formato con _i y lo separa
                       DateTime = calEvent.start._i.split(" ");
                       $('#txtDate').val(DateTime[0]);
-                      $('#txtTime').val(DateTime[1]);
-
-
-
+                      
 
 
                       $("#modalEvent").modal();
+                    },
+                    editable:true,
+                    eventDrop:function(calEvent){
+                       $('#txtID').val(calEvent.id);
+                       $('#txtTitle').val(calEvent.title);
+                       $('#txtColor').val(calEvent.color);
+                       $('#txtDescription').val(calEvent.description);
+
+                       var dateTime = calEvent.start.format().split("T");
+                      $('#txtDate').val(dateTime[0]);
+                      $('#txtTime').val(dateTime[1]);
+                      collectDataGUI();
+                      sendData('edit',form,true);
                     }
 
 
@@ -109,18 +119,42 @@
             </div>
             <div class="modal-body">
               
-              Id: <input type="text" id="txtID" name="txtID">
-              Date: <input type="text" id="txtDate" name="txtDate"><br/>
-              Title: <input type="text" id="txtTitle"><br/>
-              Time: <input type="text" id="txtTime" value="10:30"><br/>
-              Description: <textarea id="txtDescription" rows="3"></textarea><br/>
-              Color: <input type="color" value="#ff0000" id="txtColor"><br/>
+              <input type="hidden" id="txtID" name="txtID">
+              <input type="hidden" id="txtDate" name="txtDate"><br/>
+              
+              <div class="form-row">
+                  <div class="form-group col-md-8">
+                    <label>Title:</label>
+                    <input type="text" id="txtTitle" class="form-control" placeholder="Title of Event">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label>Time Event:</label>
+                    <div class="input-group clockpicker" data-autoclose="true">
+                      <input type="text" id="txtTime" value="10:30" class="form-control">
+                    </div>
+          
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label>Description:</label>
+                <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Color:</label>
+                
+                <input type="color" value="#ff0000" id="txtColor" class="form-control color-picker" style="height: 36px;">
+          <!--   <input type="color" value="#ff0000" id="txtColor" class="form-control" style="height: 36px;"> -->
+                
+              </div>
 
             </div>
             <div class="modal-footer">
               <button type="button" id="btnAdd" class="btn btn-success">Add</button>
-              <button type="button" class="btn btn-info">Edit</button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <button type="button" id="btnEdit" class="btn btn-info">Edit</button>
+              <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
               <button type="button" class="btn btn-light" data-dismiss="modal">Exit</button>
             </div>
           </div>
@@ -139,18 +173,31 @@
          sendData('add',form);
       });
 
+      $("#btnDelete").click(function(){
+         collectDataGUI();
+         sendData('delete',form);
+      });
+
+      $("#btnEdit").click(function(){
+         collectDataGUI();
+         sendData('edit',form);
+      });
+
+
+
 
       function collectDataGUI(){
+        form.append("id", $("#txtID").val());
         form.append("title", $("#txtTitle").val());
         form.append("description", $("#txtDescription").val());
-        form.append("color", $("#txtColor").val());
+        form.append("color", pickr.getColor().toHEXA().toString());
         form.append("textColor", "#FFFFFF");
         form.append("start", $("#txtDate").val() + " " + $("#txtTime").val());
         form.append("end", $("#txtDate").val() + " " + $("#txtTime").val());
 
       }
 
-      function sendData(action,objEvent){
+      function sendData(action,objEvent,modal){
           var settings = {
             "url": "events.php?action="+action,
             "method": "POST",
@@ -163,37 +210,67 @@
 
           $.ajax(settings).done(function (response) {
             $('#CalendarWeb').fullCalendar('refetchEvents');
-            $("#modalEvent").modal('toggle');
-            console.log(response);
+            if (!modal) {
+               $("#modalEvent").modal('toggle');
+            }
+            
           });
       }
 
+      $('.clockpicker').clockpicker();
+      function cleanForm(){
+        $('#txtID').val('');
+        $('#txtTitle').val('');
+        $('#txtColor').val('');
+        $('#txtDescription').val('');
+      }
+
+
+      // COLOR PICKR
+    const pickr = Pickr.create({
+    el: '.color-picker',
+    theme: 'nano',
+
+    swatches: [
+        'rgba(244, 67, 54, 1)',
+        'rgba(233, 30, 99, 0.95)',
+        'rgba(156, 39, 176, 0.9)',
+        'rgba(103, 58, 183, 0.85)',
+        'rgba(63, 81, 181, 0.8)',
+        'rgba(33, 150, 243, 0.75)',
+        'rgba(3, 169, 244, 0.7)',
+        'rgba(0, 188, 212, 0.7)',
+        'rgba(0, 150, 136, 0.75)',
+        'rgba(76, 175, 80, 0.8)',
+        'rgba(139, 195, 74, 0.85)',
+        'rgba(205, 220, 57, 0.9)',
+        'rgba(255, 235, 59, 0.95)',
+        'rgba(255, 193, 7, 1)'
+    ],
+
+    components: {
+
+        // Main components
+        preview: true,
+        opacity: false,
+        hue: true,
+
+        // Input / output Options
+        interaction: {
+            hex: true,            
+            input: true,
+            clear: true,
+            save: true
+        }
+    }
+});
 
 
 
-
-        
-
-
-
-        // console.log(objEvent);
-        //   $.ajax({
-        //       type:'POST',
-        //       url:'events.php?action='+action,
-        //       data:objEvent,
-        //       success:function(msg){
-        //         if (msg) {
-        //           $('#CalendarWeb').fullCalendar('refetchEvents');
-        //           $("#modalEvent").modal('toggle');
-
-        //         }
-        //       },
-        //       error:function(){
-        //           alert('There is an ERROR ...');
-        //       }
-        //   });
 
       </script>
+
+      
 
 
 </body>

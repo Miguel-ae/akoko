@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Fullcalendar.io CSS -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
+    <!-- Bootstrap ClockPicker CSS-->
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+    <!-- Pickr Color CSS Nano version -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+
+
 
 
 
@@ -41,8 +47,10 @@
     <!-- Fullcalendar.io JS -->
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/fullcalendar.min.js"></script>
+    <!-- Bootstrap ClockPicker JS-->
+    <script src="js/bootstrap-clockpicker.js"></script>
+    <!-- Pickr Color JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
