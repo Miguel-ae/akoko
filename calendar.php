@@ -180,7 +180,7 @@
 
       $("#btnEdit").click(function(){
          collectDataGUI();
-         sendData('edit',form);
+         sendData('editForm',form);
       });
 
 

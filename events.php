@@ -42,6 +42,28 @@ switch ($action) {
 		$sentenceSQL = $pdo->prepare("UPDATE calendar SET
 			title=:title,
 			description=:description,
+			textColor=:textColor,
+			start=:start,
+			end=:end
+			WHERE ID=:ID
+			");
+
+		$response = $sentenceSQL->execute(array(
+			"ID" =>$_POST['id'],
+			"title" =>$_POST['title'],
+			"description" =>$_POST['description'],
+			"textColor" =>$_POST['textColor'],
+			"start" =>$_POST['start'],
+			"end" =>$_POST['end']
+		));
+		echo json_encode($response);
+
+		break;
+		case 'editForm':
+		//Instruccion de modificar
+		$sentenceSQL = $pdo->prepare("UPDATE calendar SET
+			title=:title,
+			description=:description,
 			color=:color,
 			textColor=:textColor,
 			start=:start,
