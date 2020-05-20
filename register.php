@@ -5,7 +5,7 @@
 <body class="h-100 wallpaper">
 
 	<!-- Default form register -->
-<form class="text-center p-5" action="#!">
+<form class="text-center p-5" action="register-user.php" method="POST">
 <h1 class="logo pb-5 pt-3 animated fadeInDown">AK<i class="far fa-clock"></i>KO</h1>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
@@ -18,21 +18,22 @@
 			    
 			        <div class="mb-4">
 			            <!-- Full name -->
-			            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Full name">
+			            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Full name" name="fullname">
 			        </div>
 			        <div class="mb-4">
 			            <!-- Nick name -->
-			            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nickname">
+			            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nickname" name="user">
 			        </div>
 
 			    <!-- E-mail -->
-			    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+			    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
 
 			    <!-- Password -->
-			    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+			    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password" minlength="8" required>
 			    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
 			        At least 8 characters
 			    </small>
+			    <input type="text" value="1" class="d-none" name="active">
 
 			    <!-- Sign up button -->
 			    <button class="btn rounded button waves-effect btn-block font-weight-bold my-4" type="submit">Sign in</button>
