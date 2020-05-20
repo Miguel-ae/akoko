@@ -1,3 +1,25 @@
+<?php 
+  // Connect to database
+  $db = new mysqli('localhost', 'root', '', 'akoko');
+
+
+  $categoryQuery = "SELECT * FROM categories";
+
+  $categories = $db->query($categoryQuery);
+
+
+  $timerQuery = "SELECT * FROM timer WHERE id_user=1";
+
+  $timers = $db->query($timerQuery);
+
+
+
+
+ ?>
+
+
+
+
 <!-- Libraries & start html,head,meta,links,... -->
 <?php include 'includes/link.php';?>
 
@@ -15,7 +37,7 @@
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="#">Profile</a></li>
+              <li><a href="profile.php">Profile</a></li>
               <li><a class="aux-text" href="#">Log out</a></li>
            </ul>          
         </div>
@@ -57,12 +79,14 @@
 
                       <!-- Timer -->
                       <div class="col-2 timer">
-                        <span id="minutes"></span>:<span id="seconds"></span>
+                        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                       </div>
                       
                       <!-- Button Play -->
+                      
                       <div class="col-1" id="btn-timer-script">
-                        <a id="btnTimer"><i class="fas fa-play-circle"></i></a>
+
+                        <button class="border-0 bg-transparent" id="btnTimer" type="submit" name="submit"><i class="fas fa-play-circle"></i></button>
                                 <!--  El boton Play al dar click se cambiara mediante JQuery al de Stop
                                              <i class="fas fa-stop-circle"></i>     -->
                       </div>
@@ -127,23 +151,32 @@
 
 
     <script>
-      //CURRENT DATE PRINCIPAL PANEL
-    var month = new Array ("January","February","March","April","May","June","July","August","September","October","November","December");
-    var dayWeeks = new Array("Sunday","Monday","Tuesday","Wendesday","Thursday","Friday","Saturday");
-    var d = new Date();
-    var date = dayWeeks[d.getDay()] + " " + d.getDate() + ", " + month[d.getMonth()] + ", " + d.getFullYear();
-    $('.datetime-calendar').html(date);
-        // Monday 03, May, 2020
+    //CURRENT DATE PRINCIPAL PANEL
+    $(document).ready(function(){
+        var month = new Array ("January","February","March","April","May","June","July","August","September","October","November","December");
+        var dayWeeks = new Array("Sunday","Monday","Tuesday","Wendesday","Thursday","Friday","Saturday");
+        var d = new Date();
+        var date = dayWeeks[d.getDay()] + " " + d.getDate() + ", " + month[d.getMonth()] + ", " + d.getFullYear();
+        $('.datetime-calendar').html(date);
+            // Monday 03, May, 2020
+    });
 
     $("#btnTimer").click(function(){
         var sec = 0;
         function pad ( val ) { return val > 9 ? val : "0" + val; }
-        setInterval( function(){
+        var refreshIntervalId = setInterval( function(){
             $("#seconds").html(pad(++sec%60));
-            $("#minutes").html(pad(parseInt(sec/60,10)));
+            $("#minutes").html(pad(parseInt(sec/60%60,10)));
+            $("#hours").html(pad(parseInt(sec/3600,10)));
             console.log(sec);
           }, 1000);
-        $("#btn-timer-script").html("<a id=\"btnTimer\"><i class=\"fas fa-stop-circle\"></i></a>");
+        $("#btn-timer-script").html("<button class=\"border-0 bg-transparent\" id=\"btnTimer\" type=\"submit\" name=\"submit\"><i class=\"fas fa-stop-circle\"></i></button>");
+
+        $("#btnStop").click(function(){
+            clearInterval(refreshIntervalId);
+            //Aqui introducimos la insercion a la base de datos
+            // location.reload();      
+        });
     });
 
 

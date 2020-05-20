@@ -15,7 +15,6 @@
 
 
 
-
  ?>
 
 
@@ -34,10 +33,10 @@
               <li><a class="" href="timer.php">Timer</a></li>
               <li><a class="" href="calendar.php">Calendar</a></li>
               <li><a class="text-secondary" href="task.php">Tasks</a></li>
-              <li><a class="" href="#">Dashboard</a></li>
+              <li><a class="" href="">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="#">Profile</a></li>
+              <li><a href="profile.php">Profile</a></li>
               <li><a class="aux-text" href="#">Log out</a></li>
            </ul>          
         </div>
@@ -55,10 +54,9 @@
 
                 <!-- Title -->
                 <button class="btn col-1 btn-pencil" type="submit" name="submit">
-                   
                    <i class="fas fa-pencil-alt"></i>
-                   
-                </button>            
+                </button>    
+                        
                 <div class="col-8 p-3">
 
                   <input type="text" class="form-control timer-title" id="description" placeholder="Add a task ..." name="title">

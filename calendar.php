@@ -13,10 +13,10 @@
               <li><a class="" href="timer.php">Timer</a></li>
               <li><a class="text-secondary" href="calendar.php">Calendar</a></li>
               <li><a class="" href="task.php">Tasks</a></li>
-              <li><a class="" href="#">Dashboard</a></li>
+              <li><a class="" href="">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="#">Profile</a></li>
+              <li><a href="profile.php">Profile</a></li>
               <li><a class="aux-text" href="#">Log out</a></li>
            </ul>          
         </div>
