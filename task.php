@@ -47,7 +47,7 @@
 
 
     <!-- TASK  -->
-    <section class="">
+    <section>
       <div class="col-11 container">
         <form method="POST" action="addtask.php">
           <div class="row p-5 justify-content-center align-items-center">
@@ -56,7 +56,7 @@
                 <button class="btn col-1 btn-pencil" type="submit" name="submit">
                    <i class="fas fa-pencil-alt"></i>
                 </button>    
-                        
+
                 <div class="col-8 p-3">
 
                   <input type="text" class="form-control timer-title" id="description" placeholder="Add a task ..." name="title">

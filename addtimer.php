@@ -8,10 +8,11 @@
 
     $user = 1;
     $category = $_POST['category'];
-    $limitDate = $_POST['limit_date'];
+    $count = $_POST['count'];
+    
 
 
-    mysqli_query($db, "INSERT INTO task (title, id_category, id_user, limit_date) VALUES ('$title', '$category', '$user', '$limitDate')");
+    mysqli_query($db, "INSERT INTO timer (title, id_category, id_user, count) VALUES ('$title', '$category', '$user', '$count')");
     header('location: timer.php');
   }
 

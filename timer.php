@@ -63,32 +63,35 @@
               <div class="field-border row align-items-center">
                       <!-- Title -->
                       <div class="col-7 p-3">
-                        <input type="text" class="form-control timer-title" id="description" placeholder="What are you working on?">
+                        <input type="text" class="form-control timer-title" id="description" placeholder="What are you working on?" name="title">
+                        
                       </div>
 
                       <!-- Categories -->
                       <div class="col-2 p-0">
-                      <select id="categories" class="form-control">
+                      <select name="category" id="categories" class="form-control">
                         <option disabled selected>Categories</option>
-                        <option>Sports</option>
-                        <option>Study</option>
-                        <option>Languages</option>
-                        <option>Office</option>
+                      <?php while ($category=$categories->fetch_assoc()) { ?>
+                             <option value="<?=$category['id']?>"><?=$category['title']?></option> 
+                        <?php }?>
                       </select>
                       </div>
 
                       <!-- Timer -->
                       <div class="col-2 timer">
                         <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                        <input type="text" name="count" id="count" class="d-none">
                       </div>
                       
                       <!-- Button Play -->
                       
                       <div class="col-1" id="btn-timer-script">
-
-                        <button class="border-0 bg-transparent" id="btnTimer" type="submit" name="submit"><i class="fas fa-play-circle"></i></button>
+                        
+                        <div id="btnTimer">
+                        <i class="fas fa-play-circle"></i>
                                 <!--  El boton Play al dar click se cambiara mediante JQuery al de Stop
                                              <i class="fas fa-stop-circle"></i>     -->
+                        </div>
                       </div>
 
                   </div>
@@ -100,39 +103,20 @@
 
     <section class="animated fadeInDown">
 
-          <div class="row px-5 justify-content-center aceituna" id="block">
-              <div class="col-10 field-border-data px-5" id="element">
-                <div class="row py-4 align-items-center">
-                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
-                  <div class="col-2">Sports</div>
-                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
-                  <div class="col-3 text-right text-time">00:00:00</div>
-                </div>
-              </div>
-          </div>
 
+      <?php while ($timer=$timers->fetch_assoc()) { ?>
           <div class="row px-5 justify-content-center aceituna" id="block">
               <div class="col-10 field-border-data px-5" id="element">
                 <div class="row py-4 align-items-center">
-                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
+                  <div class="col-5 font-weight-bold"><?=$timer['title']?></div>
                   <div class="col-2">Sports</div>
                   <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
                   <div class="col-3 text-right text-time">00:00:00</div>
                 </div>
               </div>
           </div>
+      <?php }?>
 
-          <div class="row px-5 justify-content-center aceituna" id="block">
-              <div class="col-10 field-border-data px-5" id="element">
-                <div class="row py-4 align-items-center">
-                  <div class="col-5 font-weight-bold">Lorem ipsum dolor sit amet, consectetur</div>
-                  <div class="col-2">Sports</div>
-                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
-                  <div class="col-3 text-right text-time">00:00:00</div>
-                </div>
-              </div>
-          </div>
-          
 
 
 
@@ -170,9 +154,10 @@
             $("#hours").html(pad(parseInt(sec/3600,10)));
             console.log(sec);
           }, 1000);
-        $("#btn-timer-script").html("<button class=\"border-0 bg-transparent\" id=\"btnTimer\" type=\"submit\" name=\"submit\"><i class=\"fas fa-stop-circle\"></i></button>");
+        $("#btn-timer-script").html("<div id=\"btnStop\"><button class=\"border-0 bg-transparent\" id=\"btnTimer\" type=\"submit\" name=\"submit\"><i class=\"fas fa-stop-circle\"></i></button></div>");
 
         $("#btnStop").click(function(){
+            $("#count").val(sec);
             clearInterval(refreshIntervalId);
             //Aqui introducimos la insercion a la base de datos
             // location.reload();      
