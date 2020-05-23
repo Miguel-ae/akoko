@@ -6,7 +6,7 @@
   if (isset($_POST['submit'])) {
     $title = $_POST['title'];
 
-    $user = 1;
+    $user = $_POST['id_user'];
     $category = $_POST['category'];
     $limitDate = $_POST['limit_date'];
 

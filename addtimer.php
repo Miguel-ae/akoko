@@ -4,11 +4,11 @@
   $db = mysqli_connect('localhost', 'root', '', 'akoko');
 
   if (isset($_POST['submit'])) {
-    $title = $_POST['title'];
 
-    $user = 1;
+    $title = $_POST['title'];
     $category = $_POST['category'];
     $count = $_POST['count'];
+    $user = $_POST['id_user'];
     
 
 

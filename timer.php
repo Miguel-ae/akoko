@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <?php 
   // Connect to database
   $db = new mysqli('localhost', 'root', '', 'akoko');
@@ -8,7 +12,7 @@
   $categories = $db->query($categoryQuery);
 
 
-  $timerQuery = "SELECT * FROM timer WHERE id_user=1";
+  $timerQuery = "SELECT * FROM timer WHERE id_user=".$_SESSION['id_user'];
 
   $timers = $db->query($timerQuery);
 
@@ -37,8 +41,8 @@
               <li><a class="" href="#">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="profile.php">Profile</a></li>
-              <li><a class="aux-text" href="#">Log out</a></li>
+              <li><a href="profile.php"><?php echo $_SESSION['user']; ?></a></li>
+              <li><a class="aux-text" href="logout.php">Log out</a></li>
            </ul>          
         </div>
       </nav>
@@ -59,7 +63,7 @@
 
           <!-- Timer Panel -->
           <div class="col-9 pl-5">
-             <form action="POST" action="addtimer.php">
+             <form method="POST" action="addtimer.php">
               <div class="field-border row align-items-center">
                       <!-- Title -->
                       <div class="col-7 p-3">
@@ -82,6 +86,8 @@
                         <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                         <input type="text" name="count" id="count" class="d-none">
                       </div>
+
+                      <input type="hidden" value="<?=$_SESSION['id_user']?>" name="id_user">
                       
                       <!-- Button Play -->
                       
@@ -91,6 +97,7 @@
                         <i class="fas fa-play-circle"></i>
                                 <!--  El boton Play al dar click se cambiara mediante JQuery al de Stop
                                              <i class="fas fa-stop-circle"></i>     -->
+
                         </div>
                       </div>
 
@@ -101,17 +108,19 @@
      </section>
 
 
-    <section class="animated fadeInDown">
+    <section class="animated fadeInDown" style="min-height: 500px;">
 
 
       <?php while ($timer=$timers->fetch_assoc()) { ?>
           <div class="row px-5 justify-content-center aceituna" id="block">
               <div class="col-10 field-border-data px-5" id="element">
                 <div class="row py-4 align-items-center">
+                  <div value hidden><?=$timer['id']?></div>
                   <div class="col-5 font-weight-bold"><?=$timer['title']?></div>
-                  <div class="col-2">Sports</div>
-                  <div class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></div>
-                  <div class="col-3 text-right text-time">00:00:00</div>
+                  <div class="col-2" id="categories"><?=$timer['id_category']?></div>
+                  <a href="deletetimer.php?id=<?=$timer['id']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                  <div id="data-count" hidden><?=$timer['count']?></div>
+                  <div class="col-3 text-right text-time" id="show-count"><span id="hours_data">00</span>:<span id="minutes_data">00</span>:<span id="seconds_data">00</span></div>
                 </div>
               </div>
           </div>
@@ -154,15 +163,32 @@
             $("#hours").html(pad(parseInt(sec/3600,10)));
             console.log(sec);
           }, 1000);
+
         $("#btn-timer-script").html("<div id=\"btnStop\"><button class=\"border-0 bg-transparent\" id=\"btnTimer\" type=\"submit\" name=\"submit\"><i class=\"fas fa-stop-circle\"></i></button></div>");
 
         $("#btnStop").click(function(){
             $("#count").val(sec);
-            clearInterval(refreshIntervalId);
-            //Aqui introducimos la insercion a la base de datos
-            // location.reload();      
+            clearInterval(refreshIntervalId);      
         });
     });
+
+
+    //Mostrar datos del contador de segundos a tiempo de (sec, mins y horas)
+    $(document).ready(function(){
+     var sec = $('#data-count').html();
+     function pad ( val ) { return val > 9 ? val : "0" + val; }
+        $("#seconds_data").html(pad(++sec%60));
+        $("#minutes_data").html(pad(parseInt(sec/60%60,10)));
+        $("#hours_data").html(pad(parseInt(sec/3600,10)));
+    });
+
+    
+
+    //  $(document).ready(function(){
+    //     var category = $('#categories').html();
+    //     console.log(category);
+    // });
+
 
 
 

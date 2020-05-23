@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <?php 
   // Connect to database
   $db = new mysqli('localhost', 'root', '', 'akoko');
@@ -9,7 +13,7 @@
 
 
 
-  $taskQuery = "SELECT * FROM task WHERE id_user=1";
+  $taskQuery = "SELECT * FROM task WHERE id_user=".$_SESSION['id_user'];
 
   $tasks = $db->query($taskQuery);
 
@@ -36,8 +40,8 @@
               <li><a class="" href="">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="profile.php">Profile</a></li>
-              <li><a class="aux-text" href="#">Log out</a></li>
+              <li><a href="profile.php"><?php echo $_SESSION['user']; ?></a></li>
+              <li><a class="aux-text" href="logout.php">Log out</a></li>
            </ul>          
         </div>
       </nav>
@@ -58,9 +62,7 @@
                 </button>    
 
                 <div class="col-8 p-3">
-
                   <input type="text" class="form-control timer-title" id="description" placeholder="Add a task ..." name="title">
-                  <input type="date" name="limit_date">
                 </div>
 
                 <!-- Categories -->
@@ -73,6 +75,8 @@
                        
                   </select>
                 </div>
+
+                <input type="hidden" value="<?=$_SESSION['id_user']?>" name="id_user">
 
             </div>
         </form>
@@ -93,7 +97,7 @@
                       
                     <div class="col-2"><i class="fas fa-check-square"></i></div>
                     <div class="col-9 text-left p-2 pl-5"><?=$task['title']?></div>
-                    <div class="col-1"><i class="fas fa-backspace"></i></div>
+                    <div class="col-1"><a class="text-decoration-n" href="deletetask.php?id=<?=$task['id']?>"><i class="fas fa-backspace"></i></a></div>
           
                 </div>
              </div>
@@ -107,6 +111,7 @@
 
     </section>
     <!-- LIST TASK END -->
+
 
 </body>
 </html>

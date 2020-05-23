@@ -1,3 +1,20 @@
+<?php
+session_start();
+?>
+
+<?php 
+  // Connect to database
+  $db = new mysqli('localhost', 'root', '', 'akoko');
+
+  $userQuery = "SELECT * FROM users WHERE id=".$_SESSION['id_user'];
+
+  $users = $db->query($userQuery);
+
+
+
+?>
+
+
 <!-- Libraries & start html,head,meta,links,... -->
 <?php include 'includes/link.php';?>
 
@@ -16,7 +33,7 @@
               <li><a class="" href="">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a class="text-secondary" href="profile.php">Profile</a></li>
+              <li><a class="text-secondary" href="profile.php"><?php echo $_SESSION['user']; ?></a></li>
               
            </ul>          
         </div>
@@ -26,6 +43,8 @@
 
 
 <div class="container animated fadeInDown">
+
+  <?php while ($user=$users->fetch_assoc()) { ?>
 
   <div class="col">
     <div class="row">
@@ -40,8 +59,8 @@
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-start mb-3">
                   <div class="text-left text-sm-left mb-2 mb-sm-0">
-                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                    <p class="mb-0">@johnny.s</p>
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?php echo $_SESSION['user']; ?></h4>
+                    <p class="mb-0"><?=$user['email']?></p>
                   </div>
                   <div class="px-5">
                     <span class="badge badge-secondary">new member</span>
@@ -53,20 +72,21 @@
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                  <form class="form" novalidate="">
+
+                  <form class="form" action="update-profile.php" method="POST">
                     <div class="row">
                       <div class="col">
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
                               <label>Full Name</label>
-                              <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
+                              <input class="form-control" type="text" name="fullname" placeholder="John Smith" value="<?=$user['fullname']?>">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Username</label>
-                              <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
+                              <input class="form-control" type="text" name="user" placeholder="johnny.s" value="<?=$user['user']?>" maxlength="20">
                             </div>
                           </div>
                         </div>
@@ -74,7 +94,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Email</label>
-                              <input class="form-control" type="text" placeholder="user@example.com">
+                              <input class="form-control" type="text" name="email" value="<?=$user['email']?>">
                             </div>
                           </div>
                         </div>
@@ -82,28 +102,12 @@
                     </div>
                     <div class="row">
                       <div class="col-12 col-sm-6 mb-3">
-                        <div class="mb-2"><b>Change Password</b></div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Current Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
                               <label>New Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
+                              <input class="form-control" type="password" placeholder="••••••" minlength="8" name="password">
                             </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                              <input class="form-control" type="password" placeholder="••••••"></div>
                           </div>
                         </div>
                       </div>
@@ -126,10 +130,10 @@
         <div class="card mb-3">
           <div class="card-body">
             <div class="px-xl-3">
-              <button class="btn btn-block btn-secondary">
+              <a class="btn btn-block btn-secondary" href="logout.php">
                 <i class="fa fa-sign-out"></i>
                 <span>Logout</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -137,10 +141,13 @@
     </div>
 
   </div>
+
+  <?php }?>
 </div>
 </div>
 
-</div>s
+</div>
+
 
 
 

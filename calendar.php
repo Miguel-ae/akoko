@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!-- Libraries & start html,head,meta,links,... -->
 <?php include 'includes/link.php';?>
 
@@ -16,8 +20,8 @@
               <li><a class="" href="">Dashboard</a></li>
             </ul>
            <ul class="nav navbar-right align-items-center">
-              <li><a href="profile.php">Profile</a></li>
-              <li><a class="aux-text" href="#">Log out</a></li>
+              <li><a href="profile.php"><?php echo $_SESSION['user']; ?></a></li>
+              <li><a class="aux-text" href="logout.php">Log out</a></li>
            </ul>          
         </div>
       </nav>
@@ -150,6 +154,8 @@
                 
               </div>
 
+              <input type="hidden" value="<?=$_SESSION['id_user']?>" id="id_user">
+
             </div>
             <div class="modal-footer">
               <button type="button" id="btnAdd" class="btn btn-success">Add</button>
@@ -187,6 +193,7 @@
 
 
       function collectDataGUI(){
+        form.append("id_user", $("#id_user").val());
         form.append("id", $("#txtID").val());
         form.append("title", $("#txtTitle").val());
         form.append("description", $("#txtDescription").val());

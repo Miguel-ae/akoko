@@ -18,15 +18,15 @@
 			    
 			        <div class="mb-4">
 			            <!-- Full name -->
-			            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Full name" name="fullname">
+			            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Full name" name="fullname" required>
 			        </div>
 			        <div class="mb-4">
 			            <!-- Nick name -->
-			            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nickname" name="user">
+			            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Nickname" name="user" maxlength="20" required>
 			        </div>
 
 			    <!-- E-mail -->
-			    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
+			    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email" required>
 
 			    <!-- Password -->
 			    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password" minlength="8" required>
